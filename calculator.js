@@ -30,8 +30,8 @@ let operatorsign = document.querySelector("#operatorInputValue")
 let secondnumber = document.querySelector("#secondInputValue")
 const display = document.querySelector("#display")
 
-const numberButtons = document.querySelectorAll(".numberbuttons")
-const operators = document.querySelectorAll(".operators")
+const numberButtons = document.querySelectorAll(".numberbuttons button")
+const operators = document.querySelectorAll(".operators button")
 
 let currentDisplay = null
 
