@@ -14,81 +14,79 @@ function divide(a,b){
 return  a/b
 }
 
-function operate(a, b , c){
+function operate(a, b, c){
+  a = Number(a)
+  b = Number(b)
   if( c === "+"){ return add(a, b)} 
   else if( c === "-"){ return subtract(a, b) } 
-  else if( c === "x"){ return multipy(a, b) } 
+  else if( c === "x"){ return multiply(a, b) } 
   else if( c === "/"){ return divide(a, b) }
-  else { return "enter operator"} 
+  else { return add(a,0)} 
 }
 
-function getfirstnumber(num){
- return num
-}
 
-function getsecondnumber(num){
-  return num
-}
-
-function getoperatorsign(operator){
-  return operator
-}
-
-const number1 = document.querySelector("#number1")
-const number2 = document.querySelector("#number2")
-const number3 = document.querySelector("#number3")
-const number4 = document.querySelector("#number4")
-const number5 = document.querySelector("#number5")
-const number6 = document.querySelector("#number6")
-const number7 = document.querySelector("#number7")
-const number8 = document.querySelector("#number8")
-const number9 = document.querySelector("#number9")
-const number0 = document.querySelector("#number0")
-
-
-const operators = document.querySelectorAll(".operators")
-
-
+let firstnumber = document.querySelector("#firstInputValue")
+let operatorsign = document.querySelector("#operatorInputValue")
+let secondnumber = document.querySelector("#secondInputValue")
 const display = document.querySelector("#display")
 
-number1.addEventListener("click", function(){
- return  display.innerHTML += 1 ;
+const numberButtons = document.querySelectorAll(".numberbuttons")
+const operators = document.querySelectorAll(".operators")
+
+let currentDisplay = null
+
+numberButtons.forEach(numberButton => numberButton.addEventListener("click",(event)=>{
+  if (operatorsign.innerHTML === ""){
+  firstnumber.innerHTML += event.target.textContent;
+currentDisplay = firstnumber}
+  else {
+secondnumber.innerHTML += event.target.textContent;}
+if (display.innerHTML !=="" && operatorsign.innerHTML ===""){
+  display.innerHTML = "";
+  currentDisplay = secondnumber
+}
+}))
+
+
+
+operators.forEach(operator => operator.addEventListener("click",(event)=>{
+operatorsign.innerHTML = event.target.textContent 
+currentDisplay = operatorsign
+}))
+
+const answer = document.querySelector("#equaltosign")
+answer.addEventListener("click",() => {
+      if (display.innerHTML !="") { 
+    firstnumber.innerHTML = display.innerHTML };
+       if (operatorsign.innerHTML === "/" && secondnumber.innerHTML === "0"
+    ){ 
+      firstnumber.innerHTML = "";
+  secondnumber.innerHTML = "";
+  operatorsign.innerHTML = "";
+      return display.innerHTML = "That makes no sense"}
+currentDisplay = display
+  display.innerHTML = operate(firstnumber.innerHTML,secondnumber.innerHTML, operatorsign.innerHTML)
+  firstnumber.innerHTML = "";
+  secondnumber.innerHTML = "";
+  operatorsign.innerHTML = "";
+  console.log(firstnumber.innerHTML, secondnumber.innerHTML, operatorsign.innerHTML)
 })
 
-number2.addEventListener("click", function(){
- return  display.innerHTML += 2 ;
+const clear = document.querySelector("#clear")
+clear.addEventListener("click", () => {
+ firstnumber.innerHTML = "";
+  secondnumber.innerHTML = "";
+  operatorsign.innerHTML = "";
+  display.innerHTML = ""; 
 })
 
-number3.addEventListener("click", function(){
- return  display.innerHTML += 3 ;
-})
+const remover = document.querySelector("#remover")
+const entiredisplay = document.querySelector(".entiredisplay")
 
-number4.addEventListener("click", function(){
- return  display.innerHTML += 4 ;
-})
-
-number5.addEventListener("click", function(){
- return  display.innerHTML += 5 ;
-})
-
-number6.addEventListener("click", function(){
- return  display.innerHTML += 6 ;
-})
-
-number7.addEventListener("click", function(){
- return  display.innerHTML += 7 ;
-})
-
-number8.addEventListener("click", function(){
- return  display.innerHTML += 8 ;
-})
-
-number9.addEventListener("click", function(){
- return  display.innerHTML += 9 ;
-})
-
-number0.addEventListener("click", function(){
- return  display.innerHTML += 0 ;
+remover.addEventListener("click",()=>{
+if (currentDisplay){
+  currentDisplay.innerHTML = currentDisplay.innerHTML.slice(0,-1)
+}
 })
 
 
@@ -102,7 +100,18 @@ number0.addEventListener("click", function(){
 
 
 
-let firstnumber = firstuserinput
-let operator = operatorinput
-let secondnumber = seconduserinput
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
